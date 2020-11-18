@@ -9,10 +9,11 @@ const authRoutes = require('./routes/auth.routes')
 const postRoutes = require('./routes/post.routes')
 const commentRoutes = require('./routes/comment.routes')
 
-mongoose.set('useFindAndModify', false);
+
 mongoose.connect(keys.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true
     })
     .then(() => console.log('MongoDB connected'))
     .catch(error => console.error(error))
