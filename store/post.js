@@ -4,43 +4,82 @@ const posts = [
 ]
 
 export const actions = {
-  async fetchAdmin({}) {
-    return await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(posts)
-      }, 1000)
-    })
-  },
-  async remove({}, id) {
-
-  },
-  async update({}, {id, text}) {
-
-  },
-  async create({commit},{title,text,image}){
-
-    try{
-      const fd = new FormData()
-
-      fd.append('title',title)
-      fd.append('text',text)
-      fd.append('image',image, image.name)
-      return await new Promise(resolve => {
-        setTimeout(() => {
-          resolve()
-        }, 1000)
-      })
-    } catch(e){
-      commit('setError', r,{root:true})
+  async fetchAdmin({commit}) {
+    try {
+      return await this.$axios.$get('/backend/api/post/admin')
+    } catch (e) {
+      commit('setError', e, {root: true})
       throw e
     }
-    
   },
-  async fetchAdminById({}, id) {
-    return await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(posts.find(p => p._id === id))
-      }, 1000)
-    })
+  async fetch({commit}) {
+    try {
+      return await this.$axios.$get('/backend/api/post')
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async remove({commit}, id) {
+    try {
+      return await this.$axios.$delete(`/backend/api/post/admin/${id}`)
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async update({commit}, {id, text}) {
+    try {
+      return await this.$axios.$put(`/backend/api/post/admin/${id}`, {text})
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async create({commit}, {title, text, image}) {
+    try {
+      const fd = new FormData()
+
+      fd.append('title', title)
+      fd.append('text', text)
+      fd.append('image', image, image.name)
+
+      return await this.$axios.$post('/backend/api/post/admin', fd)
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async fetchAdminById({commit}, id) {
+    try {
+      return await this.$axios.$get(`/backend/api/post/admin/${id}`)
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async fetchById({commit}, id) {
+    try {
+      return await this.$axios.$get(`/backend/api/post/${id}`)
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async addView({commit}, {views,_id} ){
+    try {
+      return await this.$axios.$put(`/backend/api/post/add/view/${_id}`,{views})
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
+  },
+  async getAnalytics({commit}){
+    try{
+      return await this.$axios.$get('/backend/api/post/admin/get/analytics')
+    } catch(e){
+      commit('setError',e , {root:true})
+      throw e
+    } 
   }
-} 
+}

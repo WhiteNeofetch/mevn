@@ -42,7 +42,7 @@ export default {
     '/backend': {
       target: 'http://localhost:1337',
       pathRewrite: {
-        '^/backend' : '/'
+        '^/backend/' : '/'
         },
         changeOrigin: true
       }
@@ -51,7 +51,8 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
 
   axios: {
-    proxy: true
+    proxy: true,
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
