@@ -38,6 +38,9 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
   ],
+  buildModules: [
+    '@nuxtjs/pwa',
+  ],
   proxy: {
     '/backend': {
       target: 'http://localhost:1337',
@@ -55,6 +58,9 @@ export default {
     baseURL: process.env.BASE_URL || 'http://localhost:3000'
   },
 
+  env:{
+    appName: 'SSR Blog'
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     transpile: [/^element-ui/],

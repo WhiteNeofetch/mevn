@@ -60,6 +60,9 @@
 export default {
   layout: "admin",
   middleware: ["admin-auth"],
+  head:{
+    title: `Новый пост | ${process.env.appName}`
+  },
   data() {
     return {
       image: null,

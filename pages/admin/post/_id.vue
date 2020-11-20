@@ -24,7 +24,7 @@
         <small class="mr">
           <i class="el-icon-time"></i>
           <span>
-            {{ new Date(post.date).toLocaleString() }}
+            {{ post.date | date }}
           </span>
         </small>
 
@@ -54,7 +54,7 @@ export default {
   middleware: ['admin-auth'],
   head() {
     return {
-      title: `Пост | ${this.post.title}`
+      title: `${this.post.title} | ${process.env.appName}`
     }
   },
   validate({params}) {

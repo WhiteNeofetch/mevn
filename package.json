@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
+    "@nuxtjs/pwa": "^3.2.2",
     "chart.js": "^2.9.4",
     "cookie": "^0.4.1",
     "cookie-universal-nuxt": "^2.1.4",
